@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Silikon-Dichtungsform – O-Ring 20 × 3 mm</title>
+<style>
+  :root { --bg:#0f1419; --panel:#182029; --line:#2a3644; --txt:#dce3ea; --mut:#8a99a8; --acc:#2ec4b6; --warn:#ff9f1c; --ok:#5bd66b; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--txt); line-height:1.5; }
+  header { padding:28px 5vw 10px; }
+  h1 { margin:0 0 6px; font-size:clamp(1.5rem,3vw,2.3rem); }
+  h2 { margin-top:0; }
+  .sub { color:var(--mut); margin:0; }
+  .stage { display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:16px; padding:16px 5vw; }
+  @media (max-width:900px){ .stage{ grid-template-columns:1fr; } }
+  #view { position:relative; height:min(72vh,680px); border:1px solid var(--line); border-radius:14px; overflow:hidden; background:radial-gradient(circle at 50% 40%,#22303d,#0f1419); }
+  #view canvas { display:block; }
+  #caption { position:absolute; left:16px; right:16px; bottom:14px; padding:10px 14px; background:#000a; border-radius:10px; font-size:1.05rem; pointer-events:none; }
+  #vents { position:absolute; top:12px; left:12px; display:flex; gap:8px; }
+  .chip { padding:4px 10px; border-radius:20px; font-size:.85rem; background:#0009; border:1px solid var(--line); }
+  .chip.air { border-color:#7aa7ff; } .chip.sil { border-color:var(--warn); color:var(--warn); } .chip.closed { border-color:var(--ok); color:var(--ok); }
+  aside { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; }
+  ol.steps { padding-left:22px; margin:0 0 14px; }
+  ol.steps li { padding:4px 6px; border-radius:6px; color:var(--mut); }
+  ol.steps li.active { background:#2ec4b622; color:var(--txt); }
+  ol.steps li.done { color:var(--txt); }
+  .ctrl { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+  button { background:var(--acc); color:#06201d; border:0; border-radius:8px; padding:8px 14px; font-weight:600; cursor:pointer; }
+  button.sec { background:#2a3644; color:var(--txt); }
+  input[type=range] { width:100%; }
+  label { font-size:.9rem; color:var(--mut); display:flex; gap:6px; align-items:center; }
+  section { padding:10px 5vw 20px; max-width:1200px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .card h3 { margin-top:0; color:var(--acc); }
+  table { border-collapse:collapse; width:100%; font-size:.92rem; }
+  td { padding:4px 6px; border-bottom:1px solid var(--line); } td:first-child { color:var(--mut); }
+  a { color:var(--acc); }
+  .warn { border-left:4px solid var(--warn); }
+  footer { padding:20px 5vw 40px; color:var(--mut); font-size:.85rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>3D-Druck-Gießform für eine Silikon-Dichtung</h1>
+  <p class="sub">O-Ring Innen-Ø 20 mm · Schnur-Ø 3 mm · Silikon direkt aus der Kartusche · 3 Entlüftungslöcher für blasenfreies Füllen</p>
+</header>
+
+<div class="stage">
+  <div id="view">
+    <div id="vents"></div>
+    <div id="caption">Lade Modell …</div>
+  </div>
+  <aside>
+    <div class="ctrl">
+      <button id="play">⏸ Pause</button>
+      <button class="sec" id="restart">↺ Neustart</button>
+    </div>
+    <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Zeitleiste">
+    <div class="ctrl" style="margin-top:8px">
+      <label><input type="checkbox" id="xray" checked> Oberteil durchsichtig beim Füllen</label>
+      <label><input type="checkbox" id="rotate" checked> Kamera dreht</label>
+    </div>
+    <ol class="steps" id="steps"></ol>
+    <p style="font-size:.85rem;color:var(--mut);margin:0">Maus: drehen · Mausrad: zoomen · Rechtsklick: verschieben</p>
+  </aside>
+</div>
+
+<section>
+  <h2>Funktionsprinzip</h2>
+  <div class="grid">
+    <div class="card"><h3>Einspritzen</h3>Die Kartuschendüse sitzt im Trichter des Angusses (Ø 7,5 → 2,5 mm) auf dem Oberteil. Das Silikon erreicht den Ring bei 0° und fließt gleichzeitig in beide Richtungen.</div>
+    <div class="card"><h3>Entlüften</h3>Drei Löcher (Ø 1,6 mm) sitzen am höchsten Punkt des Hohlraums bei 90°, 180° und 270°. Solange sie offen sind, kann die Luft vor der Silikonfront entweichen.</div>
+    <div class="card"><h3>Verschließen</h3>Tritt an einem Loch Silikon aus, verschließen Sie es mit dem Finger. Die Löcher 1 und 2 (90°/270°) kommen zuerst, Loch 3 (180°) zuletzt, weil sich dort die beiden Fronten treffen. Kommt überall Silikon heraus, ist der Ring ohne Lufteinschluss gefüllt.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Downloads &amp; Druck</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>STL-Dateien</h3>
+      <ul>
+        <li><a href="stl/form_unterteil.stl" download>form_unterteil.stl</a>: Trennfläche oben, mit Passstiften</li>
+        <li><a href="stl/form_oberteil.stl" download>form_oberteil.stl</a>: bereits umgedreht, Trennfläche oben</li>
+        <li><a href="stl/o_ring_vorschau.stl" download>o_ring_vorschau.stl</a>: nur zur Ansicht</li>
+      </ul>
+      Beide Teile lassen sich ohne Stützstrukturen drucken.
+    </div>
+    <div class="card">
+      <h3>Druckeinstellungen</h3>
+      <table>
+        <tr><td>Material</td><td>PETG (oder PLA)</td></tr>
+        <tr><td>Schichthöhe</td><td>0,12–0,16 mm (glatter Ring)</td></tr>
+        <tr><td>Wände / Infill</td><td>4 Wände · 30 %</td></tr>
+        <tr><td>Stützen</td><td>keine</td></tr>
+        <tr><td>Düse</td><td>0,4 mm</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Zubehör</h3>
+      <table>
+        <tr><td>Schrauben</td><td>4 × M4 × 20 mm + 4 Muttern M4</td></tr>
+        <tr><td>Trennmittel</td><td>Vaseline oder Spülmittel, dünn aufgetragen</td></tr>
+        <tr><td>Kartuschendüse</td><td>Spitze auf ca. Ø 5 mm abschneiden</td></tr>
+        <tr><td>Öffnen</td><td>Schlitze links und rechts, z. B. mit einem Schlitzschraubendreher</td></tr>
+      </table>
+    </div>
+    <div class="card warn">
+      <h3>Wichtig: Aushärtung</h3>
+      Sanitärsilikon (1K) härtet durch Luftfeuchte aus, nur etwa 2–3 mm pro Tag. In einer geschlossenen Form kann das mehrere Tage dauern.
+      Schneller und zuverlässiger geht es mit <b>2K-Abformsilikon</b> mit Mischdüse oder mit Sanitärsilikon, dem ein paar Tropfen Wasser oder etwas Speisestärke beigemischt sind.
+    </div>
+  </div>
+</section>
+
+<footer>Parametrisch erzeugt mit <code>generate.py</code> (Python · manifold3d). Andere Ringmaße: Parameter oben in der Datei ändern und <code>python generate.py</code> ausführen.</footer>
+
+<script src="web/models.js"></script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+
+const P = window.MOLD.params;
+const R = P.rMajor, r = P.cord / 2, HT = P.hTop, TOPZ = P.hTop + P.bossH;
+const rad = d => d * Math.PI / 180;
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp01 = t => Math.min(1, Math.max(0, t));
+const ease = t => { t = clamp01(t); return t * t * (3 - 2 * t); };
+const seg = (t, a, b) => ease((t - a) / (b - a));
+
+// ---------- Ablauf ----------
+const VENTS = [ { n:1, a:90 }, { n:2, a:270 }, { n:3, a:180 } ];
+const T = { close:[3,6], bolts:[6,8], nozzle:[8,10], sprue:[10,10.6], fill:[10.6,22], cure:[25,27.5], unbolt:[27.5,29], open:[29,31.5], eject:[31.5,34.5], end:37 };
+const fillDeg = t => 180 * clamp01((t - T.fill[0]) / (T.fill[1] - T.fill[0]));
+const reachT = a => T.fill[0] + (Math.min(a, 360 - a) / 180) * (T.fill[1] - T.fill[0]);
+const STEPS = [
+  { t:0,    txt:'Zweiteilige Form: Unterteil mit Ring-Halbnut und Passstiften, Oberteil mit Anguss und 3 Entlüftungslöchern.' },
+  { t:T.close[0], txt:'Form schließen: Die Passstifte (Ø 5 / Ø 4 mm) richten das Oberteil aus und verhindern, dass es verdreht aufgesetzt wird.' },
+  { t:T.bolts[0], txt:'Form mit 4 Schrauben M4 verschrauben, damit sie dem Einspritzdruck standhält.' },
+  { t:T.nozzle[0], txt:'Kartuschendüse in den Trichter des Angusses drücken.' },
+  { t:T.sprue[0], txt:'Silikon einspritzen. Die Luft entweicht durch alle drei offenen Löcher.' },
+  { t:reachT(90), txt:'Silikon tritt an Loch 1 und Loch 2 aus. Beide mit dem Finger verschließen und weiter einspritzen.' },
+  { t:reachT(180), txt:'Silikon tritt an Loch 3 aus, wo sich die beiden Fronten treffen. Mit dem Finger verschließen. Der Ring ist jetzt ohne Lufteinschluss gefüllt.' },
+  { t:T.cure[0], txt:'Düse abnehmen und das Silikon aushärten lassen (siehe Hinweis unten).' },
+  { t:T.unbolt[0], txt:'Schrauben lösen und die Form an den Hebelschlitzen öffnen.' },
+  { t:T.eject[0], txt:'Den O-Ring entnehmen und Grat sowie Angussreste abschneiden. Fertig.' },
+];
+
+// ---------- Szene ----------
+const view = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({ antialias:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+view.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(38, 1, 1, 2000);
+camera.position.set(80, 125, 105);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 6, 0); controls.enableDamping = true; controls.autoRotateSpeed = 0.6;
+scene.add(new THREE.HemisphereLight(0xdde8ff, 0x202830, 1.4));
+const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(60, 120, 80); scene.add(sun);
+const fillL = new THREE.DirectionalLight(0x88aaff, 0.7); fillL.position.set(-80, 40, -60); scene.add(fillL);
+const grid = new THREE.GridHelper(200, 40, 0x2a3644, 0x1c252f); grid.position.y = -P.hBottom - 0.05; scene.add(grid);
+
+const world = new THREE.Group(); world.rotation.x = -Math.PI / 2; scene.add(world); // Modell ist Z-oben
+
+const loader = new STLLoader();
+const geo = b64 => { const s = atob(b64), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); const g = loader.parse(u.buffer); g.computeVertexNormals(); return g; };
+
+const matBottom = new THREE.MeshStandardMaterial({ color:0x3d7ccf, roughness:.55, metalness:.05 });
+const matTop = new THREE.MeshStandardMaterial({ color:0xe4572e, roughness:.55, metalness:.05, transparent:true });
+const matSil = new THREE.MeshStandardMaterial({ color:0x2ec4b6, roughness:.35, emissive:0x0b3d39 });
+const bottom = new THREE.Mesh(geo(MOLD.bottom), matBottom);
+const top = new THREE.Mesh(geo(MOLD.top), matTop);
+world.add(bottom, top);
+const sealMesh = new THREE.Mesh(geo(MOLD.seal), matSil); world.add(sealMesh);
+
+// Schrauben + Muttern
+const steel = new THREE.MeshStandardMaterial({ color:0xb8c0c8, metalness:.8, roughness:.3 });
+const bolts = [];
+for (const sx of [-1, 1]) for (const sy of [-1, 1]) {
+  const g = new THREE.Group();
+  const shaft = new THREE.Mesh(new THREE.CylinderGeometry(2, 2, 20, 20), steel); shaft.rotation.x = Math.PI / 2; shaft.position.z = -10;
+  const head = new THREE.Mesh(new THREE.CylinderGeometry(3.6, 3.6, 3, 24), steel); head.rotation.x = Math.PI / 2; head.position.z = 1.5;
+  g.add(shaft, head); g.userData.base = new THREE.Vector3(sx * P.boltPos, sy * P.boltPos, HT);
+  const nut = new THREE.Mesh(new THREE.CylinderGeometry(4.1, 4.1, 3.2, 6), steel); nut.rotation.x = Math.PI / 2;
+  nut.userData.base = new THREE.Vector3(sx * P.boltPos, sy * P.boltPos, -P.hBottom + 1.6);
+  world.add(g, nut); bolts.push({ g, nut });
+}
+
+// Kartusche
+const cart = new THREE.Group();
+const nozMat = new THREE.MeshStandardMaterial({ color:0xf2f2f2, roughness:.4, transparent:true, opacity:.85 });
+const noz = new THREE.Mesh(new THREE.CylinderGeometry(2.6, 7, 55, 32, 1, true), nozMat); noz.rotation.x = Math.PI / 2; noz.position.z = 27.5;
+const body = new THREE.Mesh(new THREE.CylinderGeometry(23.5, 23.5, 70, 48), new THREE.MeshStandardMaterial({ color:0xdddddd, roughness:.6, transparent:true, opacity:.55 }));
+body.rotation.x = Math.PI / 2; body.position.z = 55 + 35;
+const nozSil = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 6.4, 54, 24), matSil); nozSil.rotation.x = Math.PI / 2; nozSil.position.z = 27.5;
+cart.add(noz, body, nozSil); world.add(cart);
+const [spx, spy] = [R * Math.cos(rad(P.sprueAngle)), R * Math.sin(rad(P.sprueAngle))];
+
+// Silikon im Anguss und in den Kanälen
+const sprueSil = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 1, 16), matSil); sprueSil.rotation.x = Math.PI / 2; world.add(sprueSil);
+const fillA = new THREE.Mesh(new THREE.BufferGeometry(), matSil), fillB = new THREE.Mesh(new THREE.BufferGeometry(), matSil);
+world.add(fillA, fillB);
+let lastArc = -1;
+function setFill(deg) {
+  if (Math.abs(deg - lastArc) < 0.2) return; lastArc = deg;
+  const arc = Math.max(rad(deg), 0.001), segs = Math.max(2, Math.ceil(deg / 3));
+  fillA.geometry.dispose(); fillB.geometry.dispose();
+  fillA.geometry = new THREE.TorusGeometry(R, r * 0.97, 16, segs, arc);
+  fillB.geometry = new THREE.TorusGeometry(R, r * 0.97, 16, segs, arc);
+  fillB.rotation.z = -arc;
+}
+
+// Entlüftungen: Silikonaustritt, Finger, Luftblasen
+const skin = new THREE.MeshStandardMaterial({ color:0xe0ac8a, roughness:.7 });
+for (const v of VENTS) {
+  v.x = R * Math.cos(rad(v.a)); v.y = R * Math.sin(rad(v.a));
+  v.reach = reachT(v.a); v.close = v.reach + 0.9;
+  v.col = new THREE.Mesh(new THREE.CylinderGeometry(.75, .75, HT - r, 12), matSil); v.col.rotation.x = Math.PI / 2;
+  v.col.position.set(v.x, v.y, r + (HT - r) / 2); v.col.visible = false;
+  v.blob = new THREE.Mesh(new THREE.SphereGeometry(1.6, 20, 14), matSil); v.blob.position.set(v.x, v.y, HT);
+  v.finger = new THREE.Group();
+  const f = new THREE.Mesh(new THREE.CapsuleGeometry(7, 34, 8, 20), skin); f.position.y = 7 + 17; v.finger.add(f);
+  v.dir = new THREE.Vector3(Math.cos(rad(v.a)) * .55, Math.sin(rad(v.a)) * .55, 1).normalize();
+  v.finger.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), v.dir);
+  world.add(v.col, v.blob, v.finger);
+}
+const bubbleGeo = new THREE.SphereGeometry(.7, 10, 8);
+const bubbles = Array.from({ length:45 }, (_, i) => {
+  const m = new THREE.Mesh(bubbleGeo, new THREE.MeshStandardMaterial({ color:0xcfe3ff, transparent:true, opacity:.7 }));
+  m.userData = { vent:VENTS[i % 3], phase:(i / 45) * 1.0 + (i % 3) * .13 }; world.add(m); return m;
+});
+
+// ---------- UI ----------
+const stepsEl = document.getElementById('steps');
+STEPS.forEach(s => { const li = document.createElement('li'); li.textContent = s.txt.split('.')[0].split(':')[0]; stepsEl.append(li); });
+const ventsEl = document.getElementById('vents');
+const chips = VENTS.map(v => { const c = document.createElement('span'); c.className = 'chip'; ventsEl.append(c); return c; });
+const caption = document.getElementById('caption'), scrub = document.getElementById('scrub');
+let t = 0, playing = true, last = performance.now();
+const playBtn = document.getElementById('play');
+playBtn.onclick = () => { playing = !playing; playBtn.textContent = playing ? '⏸ Pause' : '▶ Abspielen'; };
+document.getElementById('restart').onclick = () => { t = 0; if (!playing) playBtn.click(); };
+scrub.oninput = () => { t = scrub.value / 1000 * T.end; };
+const xray = document.getElementById('xray'), rot = document.getElementById('rotate');
+
+function update(t) {
+  // Oberteil
+  const lift = 28 * (1 - seg(t, ...T.close)) + 30 * seg(t, ...T.open);
+  top.position.z = lift;
+  const xr = xray.checked ? seg(t, T.nozzle[0], T.sprue[0]) * (1 - seg(t, T.cure[1], T.unbolt[0])) : 0;
+  matTop.opacity = 1 - .72 * xr; matTop.depthWrite = matTop.opacity > .95;
+  // Schrauben
+  const bIn = seg(t, ...T.bolts) * (1 - seg(t, ...T.unbolt));
+  for (const { g, nut } of bolts) {
+    g.position.copy(g.userData.base); g.position.z += 30 * (1 - bIn) + lift * (t > T.open[0] ? 1 : 0);
+    nut.position.copy(nut.userData.base); nut.position.z -= 18 * (1 - bIn);
+    g.visible = nut.visible = bIn > 0.001;
+  }
+  // Kartusche
+  const nIn = seg(t, ...T.nozzle) * (1 - seg(t, T.fill[1] + 1.5, T.cure[0] + .5));
+  cart.position.set(spx, spy, TOPZ - 3.5 + 70 * (1 - nIn)); cart.visible = nIn > 0.001;
+  nozSil.visible = t > T.sprue[0] - .3 && t < T.cure[0] + .5;
+  // Silikon
+  const sp = seg(t, ...T.sprue), deg = fillDeg(t), injected = t >= T.sprue[0];
+  sprueSil.visible = injected && t < T.eject[0];
+  const sLen = Math.max(.01, (TOPZ - .2) * sp); sprueSil.scale.set(1, sLen, 1);
+  sprueSil.position.set(spx, spy, TOPZ - sLen / 2 + lift);
+  setFill(deg);
+  const ringVisible = injected && t < T.eject[0];
+  fillA.visible = fillB.visible = ringVisible && deg > 0.3;
+  sealMesh.visible = t >= T.eject[0];
+  const ej = seg(t, ...T.eject);
+  sealMesh.position.set(-38 * ej, 0, 6 * Math.sin(ej * Math.PI) + 2 * ej); sealMesh.rotation.set(0, 0, ej * 1.5);
+  // Entlüftungen
+  VENTS.forEach((v, i) => {
+    const out = seg(t, v.reach, v.reach + .6), press = seg(t, v.reach + .5, v.close), leave = seg(t, T.cure[0] + .5, T.cure[0] + 1.6);
+    v.col.visible = t > v.reach && t < T.unbolt[1]; v.col.position.z = r + (HT - r) / 2 + lift;
+    v.blob.visible = out > 0 && t < T.unbolt[1];
+    v.blob.scale.set(out * (1 + .6 * press), out * (1 + .6 * press), out * (1 - .7 * press) + .01);
+    v.blob.position.set(v.x, v.y, HT + lift);
+    const fd = 45 * (1 - press) + 45 * leave;
+    v.finger.visible = press > 0 && leave < 1;
+    v.finger.position.set(v.x, v.y, HT + .4).addScaledVector(v.dir, fd);
+    const state = t < v.reach ? 'air' : t < v.close ? 'sil' : 'closed';
+    const done = t >= T.cure[0] + 1.6;
+    chips[i].className = 'chip ' + (t < T.sprue[0] ? '' : done ? 'closed' : state);
+    chips[i].textContent = `Loch ${v.n} (${v.a}°): ` + (t < T.sprue[0] ? 'offen' : done ? 'gefüllt ✓' : state === 'air' ? 'Luft entweicht' : state === 'sil' ? 'Silikon tritt aus!' : 'mit Finger verschlossen');
+  });
+  bubbles.forEach(b => {
+    const v = b.userData.vent, open = injected && t < v.reach;
+    b.visible = open;
+    if (!open) return;
+    const k = ((t * 1.3 + b.userData.phase) % 1);
+    b.position.set(v.x + Math.sin(k * 9 + b.userData.phase * 20) * 1.2, v.y + Math.cos(k * 7) * 1.2, HT + k * 14);
+    b.material.opacity = .8 * (1 - k); b.scale.setScalar(.6 + k);
+  });
+  // Text
+  let idx = 0; STEPS.forEach((s, i) => { if (t >= s.t) idx = i; });
+  caption.textContent = STEPS[idx].txt;
+  [...stepsEl.children].forEach((li, i) => li.className = i === idx ? 'active' : i < idx ? 'done' : '');
+}
+
+function resize() { const w = view.clientWidth, h = view.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+function loop(now) {
+  const dt = Math.min(.1, (now - last) / 1000); last = now;
+  if (playing) { t += dt; if (t > T.end) t = 0; scrub.value = Math.round(t / T.end * 1000); }
+  controls.autoRotate = rot.checked && playing;
+  update(t); controls.update(); renderer.render(scene, camera);
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
