@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de" data-lavish-annotate="on">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abgesenkte Trennfläche</title>
+<style>
+  :root { --bg:#0f1419; --panel:#182029; --line:#2a3644; --txt:#dce3ea; --mut:#8a99a8; --acc:#2ec4b6; --warn:#ff9f1c; --ok:#5bd66b; --bad:#ff5c5c; --top:#e4572e; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--txt); line-height:1.5; }
+  header, section { padding:18px 5vw; max-width:1200px; margin:0 auto; }
+  h1 { margin:0 0 6px; font-size:clamp(1.5rem,3vw,2.1rem); }
+  h2 { margin:0 0 12px; font-size:1.25rem; }
+  h3 { margin:0 0 6px; font-size:1.05rem; }
+  .sub { color:var(--mut); margin:0; }
+  .grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; }
+  @media (max-width:860px){ .grid { grid-template-columns:minmax(0,1fr); } }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; min-width:0; }
+  .card.ok { border-left:4px solid var(--ok); }
+  svg, img { width:100%; max-width:420px; height:auto; display:block; margin:0 auto; }
+  img { max-width:100%; border-radius:10px; border:1px solid var(--line); }
+  .cap { font-size:.88rem; color:var(--mut); margin:8px 0 0; }
+  table { width:100%; border-collapse:collapse; font-size:.92rem; }
+  td { padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  td:first-child { color:var(--mut); white-space:nowrap; }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:.85rem; margin-top:8px; justify-content:center; }
+  .legend i { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+  a { color:var(--acc); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Trennfläche abgesenkt: nur Steg und Pads berühren</h1>
+  <p class="sub">Ja, das 3D-Modell ist geändert. Das Oberteil liegt jetzt nur noch an wenigen Stellen auf, damit Schmutz und Grat die Passung bei wiederholtem Gießen weniger stören.</p>
+</header>
+
+<section>
+  <div class="grid">
+    <div class="card ok">
+      <h3>Unterseite des Oberteils (Draufsicht)</h3>
+      <svg viewBox="0 0 300 300" role="img" aria-label="Unterseite des Oberteils mit Steg um den Ring und Pads">
+        <title>Unterseite Oberteil</title>
+        <rect id="recess" x="0" y="0" width="300" height="300" rx="24" fill="#2a1a14" stroke="var(--line)" stroke-width="2"/>
+        <g id="land" fill="var(--top)" fill-opacity=".85">
+          <path fill-rule="evenodd" d="M150 42 a108 108 0 1 0 0.01 0 Z M150 120 a30 30 0 1 1 -0.01 0 Z"/>
+          <circle cx="30" cy="30" r="36"/><circle cx="270" cy="30" r="36"/>
+          <circle cx="30" cy="270" r="36"/><circle cx="270" cy="270" r="36"/>
+          <circle cx="150" cy="30" r="36"/><circle cx="150" cy="270" r="36"/>
+        </g>
+        <g id="channel" fill="none" stroke="var(--acc)" stroke-width="18" opacity=".9">
+          <circle cx="150" cy="150" r="69"/>
+        </g>
+        <circle id="sprue" cx="219" cy="150" r="9" fill="var(--warn)"/>
+        <text x="219" y="176" fill="var(--txt)" font-size="11" text-anchor="middle">Anguss</text>
+        <g fill="var(--bg)" stroke="var(--txt)" stroke-width="1.5">
+          <circle cx="150" cy="81" r="4"/><circle cx="150" cy="219" r="4"/><circle cx="81" cy="150" r="4"/>
+        </g>
+        <g fill="var(--txt)" font-size="11" text-anchor="middle">
+          <text x="150" y="70">1</text><text x="150" y="240">2</text><text x="68" y="154">3</text>
+        </g>
+        <g fill="var(--bg)" stroke="var(--txt)" stroke-width="1.5"><circle cx="30" cy="30" r="9"/><circle cx="270" cy="30" r="9"/><circle cx="30" cy="270" r="9"/><circle cx="270" cy="270" r="9"/></g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:var(--top)"></i>Kontakt (Höhe 0)</span>
+        <span><i style="background:#2a1a14;border:1px solid var(--line)"></i>abgesenkt (−0,4 mm)</span>
+        <span><i style="background:var(--acc)"></i>Ringkanal</span>
+      </div>
+      <p class="cap">Die Nummern 1 bis 3 sind die Entlüftungslöcher. Alle drei und der Anguss liegen im Steg, die Dichtung am Ring bleibt also erhalten.</p>
+    </div>
+    <div class="card">
+      <h3>Querschnitt: vorher und nachher</h3>
+      <svg viewBox="0 0 300 250" role="img" aria-label="Querschnitt Trennfläche vorher nachher">
+        <title>Querschnitt</title>
+        <g font-size="11" fill="var(--mut)"><text x="4" y="16">Vorher: ganze Fläche liegt auf</text></g>
+        <rect x="10" y="60" width="280" height="22" fill="#3d7ccf"/>
+        <rect x="10" y="38" width="280" height="22" fill="var(--top)"/>
+        <circle cx="150" cy="60" r="12" fill="var(--acc)"/>
+        <g font-size="11" fill="var(--mut)"><text x="4" y="136">Nachher: nur Steg und Pads liegen auf</text></g>
+        <rect x="10" y="188" width="280" height="22" fill="#3d7ccf"/>
+        <rect x="10" y="166" width="280" height="22" fill="var(--top)"/>
+        <rect x="10" y="184" width="95" height="4" fill="#2a1a14"/>
+        <rect x="195" y="184" width="95" height="4" fill="#2a1a14"/>
+        <circle cx="150" cy="188" r="12" fill="var(--acc)"/>
+        <text x="57" y="178" font-size="10" fill="var(--txt)" text-anchor="middle">Luft −0,4 mm</text>
+        <text x="243" y="178" font-size="10" fill="var(--txt)" text-anchor="middle">Luft −0,4 mm</text>
+        <text x="150" y="232" font-size="10" fill="var(--txt)" text-anchor="middle">Steg 5 mm links und rechts vom Ring</text>
+      </svg>
+      <p class="cap">Skizze, nicht maßstäblich.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="grid">
+    <div class="card">
+      <h3>Die Änderung</h3>
+      <table>
+        <tr><td>Absenkung</td><td>0,4 mm, nur am Oberteil</td></tr>
+        <tr><td>Steg um Ring</td><td>5 mm breit beidseits (r 5 bis 18 mm)</td></tr>
+        <tr><td>Pads</td><td>Ø 12 mm um 4 Schrauben und 2 Passstifte</td></tr>
+        <tr><td>Entlüftung, Anguss</td><td>liegen im Steg</td></tr>
+        <tr><td>Unterteil</td><td>unverändert</td></tr>
+        <tr><td>Geprüft</td><td>Modell wasserdicht, Volumen −0,4 cm³. Nicht im Slicer angesehen</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Animation (aktueller Stand)</h3>
+      <img src="animation.png" alt="Screenshot der Animation mit Kartusche und Kegeltrichter">
+      <p class="cap">Mit Kegeltrichter und neuer Kartusche. Live: <a href="https://raw.githack.com/stefaneicher/silikon-dichtung-form/master/index.html">Demo bei githack</a>. Die Absenkung sieht man dort nur beim Anheben des Oberteils.</p>
+    </div>
+  </div>
+</section>
+</body>
+</html>
