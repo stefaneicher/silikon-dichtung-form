@@ -15,6 +15,7 @@ Die Form hat drei Entlüftungslöcher, die Sie nacheinander mit dem Finger versc
 | Anguss | Kegeltrichter Ø 18 → 5,5 mm, 10 mm tief, für die Spitze (ca. Ø 5 mm) einer Standard-Kartuschendüse, danach Kanal Ø 2,5 mm, bei 0° |
 | Entlüftung | 3 × Ø 1,6 mm am höchsten Punkt des Rings: Loch 1 = 90°, Loch 2 = 270°, Loch 3 = 180° |
 | Ausrichtung | Passstifte Ø 5 und Ø 4 mm, unterschiedlich groß, damit das Oberteil nicht verdreht aufgesetzt wird |
+| Trennfläche | Im Oberteil um 0,4 mm abgesenkt. Nur ein 5 mm breiter Steg um den Ring und Pads (Ø 12 mm) um Schrauben und Passstifte berühren das Unterteil. Schmutz und Grat in den Vertiefungen stören die Passung beim wiederholten Gießen nicht |
 | Verschluss | 4 × M4-Schrauben mit Mutterfallen im Unterteil |
 | Öffnen | Hebelschlitze links und rechts |
 

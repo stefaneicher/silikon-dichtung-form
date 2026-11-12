@@ -47,6 +47,10 @@ VENT_D = 1.6
 
 PRY_W, PRY_H, PRY_DEPTH = 10.0, 1.5, 4.0
 
+RECESS = 0.4             # Trennfläche des Oberteils ist abgesenkt, nur Steg und Pads berühren
+LAND_W = 5.0             # Stegbreite beidseits des Rings
+PAD_D = 12.0             # Pads um Schrauben und Passstifte
+
 
 def polar(angle_deg, r=R_MAJOR):
     a = math.radians(angle_deg)
@@ -98,8 +102,22 @@ def bottom_half():
     return m
 
 
+def contact_recess():
+    """Abgesenkter Bereich der Trennfläche: nur Ringsteg und Pads um Schrauben/Passstifte bleiben auf Höhe 0."""
+    h = RECESS + 0.4
+    r_out, r_in = R_MAJOR + R_MINOR + LAND_W, max(R_MAJOR - R_MINOR - LAND_W, 0.5)
+    keep = Manifold.cylinder(h, r_out) - Manifold.cylinder(h, r_in)
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            keep = keep + Manifold.cylinder(h, PAD_D / 2).translate((sx * BOLT_POS, sy * BOLT_POS, 0))
+    for x, y, _ in (PIN_A, PIN_B):
+        keep = keep + Manifold.cylinder(h, PAD_D / 2).translate((x, y, 0))
+    return rounded_block(RECESS, 0) - keep.translate((0, 0, -0.2))
+
+
 def top_half():
     m = rounded_block(H_TOP, 0)
+    m = m - contact_recess()
     sx_, sy_ = polar(SPRUE_ANGLE)
     m = m + Manifold.cylinder(BOSS_H, BOSS_D / 2).translate((sx_, sy_, H_TOP - 0.01))
     m = m - ring_cavity()
