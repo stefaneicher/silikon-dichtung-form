@@ -3,7 +3,9 @@
 Zweiteilige 3D-Druck-Gießform, mit der sich ein O-Ring direkt aus einer Silikonkartusche spritzen lässt.
 Die Form hat drei Entlüftungslöcher, die Sie nacheinander mit dem Finger verschließen. So wird der Ring ohne Lufteinschlüsse gefüllt.
 
-**Demo:** `index.html` im Browser öffnen. Die Seite zeigt ein interaktives 3D-Modell mit einer Animation des Ablaufs.
+> 🤖 **KI-Test:** Dieses Repository ist ein Experiment. Form, 3D-Modell, Animation und Webseite hat eine KI (GitHub Copilot CLI) aus einem einzigen Prompt erzeugt. Die Prompts stehen in [`prompt.md`](prompt.md). Die Form ist nicht real gedruckt und getestet.
+
+**Demo:** [Interaktives 3D-Modell mit Animation des Ablaufs](https://raw.githack.com/stefaneicher/silikon-dichtung-form/master/index.html) (gehostet über githack.com). Lokal reicht es, `index.html` im Browser zu öffnen.
 
 ## Aufbau
 | Merkmal | Wert |
@@ -28,13 +30,22 @@ Die Form hat drei Entlüftungslöcher, die Sie nacheinander mit dem Finger versc
 
 ## Druck
 `stl/form_unterteil.stl` und `stl/form_oberteil.stl` sind bereits richtig ausgerichtet: Die Trennfläche zeigt jeweils nach oben, Stützstrukturen sind nicht nötig.
+Dateien im Ordner `stl/`:
+
+| Datei | Inhalt |
+|---|---|
+| `form_unterteil.stl`, `form_oberteil.stl` | Die beiden Formhälften einzeln |
+| `druckplatte.3mf` | Beide Hälften nebeneinander als zwei Objekte, für einen Druck auf einer Platte |
+| `druckplatte.stl` | Dieselbe Platte als einzelne STL, falls der Slicer kein 3MF liest |
+| `o_ring_vorschau.stl` | Nur Vorschau des fertigen Rings, nicht drucken |
+
 Empfohlen: PETG, Schichthöhe 0,12–0,16 mm, 4 Wände, 30 % Infill.
 
 ## Andere Maße
 Die Parameter stehen oben in `generate.py`, z. B. `RING_ID` und `CORD`. So erzeugen Sie die Dateien neu:
 ```powershell
 py -m venv .venv
-.\.venv\Scripts\pip install trimesh manifold3d numpy
+.\.venv\Scripts\pip install trimesh manifold3d numpy networkx lxml
 .\.venv\Scripts\python generate.py
 ```
-Das Skript schreibt die Dateien `stl/*.stl` und `web/models.js`, die von der Webseite verwendet wird.
+Das Skript schreibt die Dateien `stl/*.stl`, `stl/druckplatte.3mf` und `web/models.js`, die von der Webseite verwendet wird.

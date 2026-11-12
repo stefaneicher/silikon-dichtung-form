@@ -143,6 +143,13 @@ def main():
     t.export(os.path.join(root, "stl", "form_oberteil.stl"))
     parts["seal"].export(os.path.join(root, "stl", "o_ring_vorschau.stl"))
 
+    # Druckplatte: beide Teile nebeneinander, als STL und 3MF (zwei Objekte)
+    b2 = b.copy(); b2.apply_translation((-b.bounds[1][0] - 5, 0, 0))
+    t2 = t.copy(); t2.apply_translation((-t.bounds[0][0] + 5, 0, 0))
+    scene = trimesh.Scene({"unterteil": b2, "oberteil": t2})
+    scene.export(os.path.join(root, "stl", "druckplatte.3mf"))
+    trimesh.util.concatenate([b2, t2]).export(os.path.join(root, "stl", "druckplatte.stl"))
+
     lines = ["// automatisch erzeugt von generate.py – nicht von Hand bearbeiten",
              "window.MOLD = {",
              f"  params: {{ringId:{RING_ID}, cord:{CORD}, rMajor:{R_MAJOR}, hBottom:{H_BOTTOM}, hTop:{H_TOP},"
