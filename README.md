@@ -23,10 +23,11 @@ Die Form hat drei Entlüftungslöcher, die Sie nacheinander mit dem Finger versc
 2. Kartuschendüse auf ca. Ø 5 mm abschneiden und in den Trichter drücken. Dann Silikon einspritzen.
 3. Silikon tritt zuerst an **Loch 1 und Loch 2** aus. Beide mit dem Finger verschließen und weiter einspritzen.
 4. Danach tritt Silikon an **Loch 3** aus, wo sich die beiden Fronten treffen. Auch dieses Loch verschließen. Der Ring ist jetzt ohne Lufteinschlüsse gefüllt.
-5. Silikon aushärten lassen, Form öffnen und Grat sowie Angussreste abschneiden.
+5. Düse abnehmen und ca. 30–60 Minuten warten, bis sich außen eine Haut gebildet hat. Dann Schrauben lösen und das **Oberteil abnehmen**. Der Ring bleibt in der Nut des Unterteils und härtet dort **offen an der Luft** durch (siehe Hinweis).
+6. Nach 24–48 Stunden den Ring herausnehmen sowie Grat und Angussreste abschneiden.
 
-> ⚠️ Sanitärsilikon (1K) härtet durch Luftfeuchte nur etwa 2–3 mm pro Tag aus. In einer geschlossenen Form dauert das mehrere Tage.
-> Besser geeignet ist 2K-Abformsilikon. Alternativ können Sie dem Sanitärsilikon ein paar Tropfen Wasser oder etwas Speisestärke beimischen.
+> ⚠️ **1K-Silikon** härtet nur durch Luftfeuchte von außen, etwa 2–3 mm pro Tag. In der geschlossenen Form kommt fast keine Feuchte an den Ring. Deshalb wird das Oberteil früh abgenommen: Der halbe Schnurquerschnitt (1,5 mm) liegt dann frei und härtet in ein bis zwei Tagen durch.
+> Tipps: Neutral- oder Essigsilikon in dünnen Raupen verwenden, bei Zimmertemperatur und normaler bis höherer Luftfeuchte aushärten lassen. Ein paar Tropfen Wasser im Silikon beschleunigen das Aushärten. Das Oberteil kräftiger mit Trennmittel einstreichen als das Unterteil, damit der Ring unten bleibt. Den Ring nicht zu früh herausnehmen, er verformt sich sonst.
 
 ## Druck
 `stl/form_unterteil.stl` und `stl/form_oberteil.stl` sind bereits richtig ausgerichtet: Die Trennfläche zeigt jeweils nach oben, Stützstrukturen sind nicht nötig.
