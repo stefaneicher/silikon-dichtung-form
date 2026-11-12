@@ -12,7 +12,7 @@ Die Form hat drei Entlüftungslöcher, die Sie nacheinander mit dem Finger versc
 |---|---|
 | O-Ring | Innen-Ø 20 mm, Schnur-Ø 3 mm (Mitten-Ø 23 mm) |
 | Form | 50 × 50 mm, 2 × 8 mm hoch, Trennebene in der Ringmitte |
-| Anguss | Trichter Ø 7,5 → 2,5 mm in einem Sockel für die Kartuschendüse, bei 0° |
+| Anguss | Kegeltrichter Ø 18 → 5,5 mm, 10 mm tief, für die Spitze (ca. Ø 5 mm) einer Standard-Kartuschendüse, danach Kanal Ø 2,5 mm, bei 0° |
 | Entlüftung | 3 × Ø 1,6 mm am höchsten Punkt des Rings: Loch 1 = 90°, Loch 2 = 270°, Loch 3 = 180° |
 | Ausrichtung | Passstifte Ø 5 und Ø 4 mm, unterschiedlich groß, damit das Oberteil nicht verdreht aufgesetzt wird |
 | Verschluss | 4 × M4-Schrauben mit Mutterfallen im Unterteil |

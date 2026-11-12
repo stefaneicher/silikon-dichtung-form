@@ -61,6 +61,7 @@
     <div class="ctrl" style="margin-top:8px">
       <label><input type="checkbox" id="xray" checked> Oberteil durchsichtig beim Füllen</label>
       <label><input type="checkbox" id="rotate" checked> Kamera dreht</label>
+      <label><input type="checkbox" id="cut"> Schnitt durch den Trichter</label>
     </div>
     <ol class="steps" id="steps"></ol>
     <p style="font-size:.85rem;color:var(--mut);margin:0">Maus: drehen · Mausrad: zoomen · Rechtsklick: verschieben</p>
@@ -70,7 +71,7 @@
 <section>
   <h2>Funktionsprinzip</h2>
   <div class="grid">
-    <div class="card"><h3>Einspritzen</h3>Die Kartuschendüse sitzt im Trichter des Angusses (Ø 7,5 → 2,5 mm) auf dem Oberteil. Das Silikon erreicht den Ring bei 0° und fließt gleichzeitig in beide Richtungen.</div>
+    <div class="card"><h3>Einspritzen</h3>Die Kartuschendüse (Spitze ca. Ø 5 mm, nach vorn verjüngt) sitzt im kegeligen Trichter des Angusses (Ø 18 → 5,5 mm, 10 mm tief) auf dem Oberteil. Der Trichter führt die Düse und fängt Silikon auf. Das Silikon erreicht den Ring bei 0° und fließt gleichzeitig in beide Richtungen.</div>
     <div class="card"><h3>Entlüften</h3>Drei Löcher (Ø 1,6 mm) sitzen am höchsten Punkt des Hohlraums bei 90°, 180° und 270°. Solange sie offen sind, kann die Luft vor der Silikonfront entweichen.</div>
     <div class="card"><h3>Verschließen</h3>Tritt an einem Loch Silikon aus, verschließen Sie es mit dem Finger. Die Löcher 1 und 2 (90°/270°) kommen zuerst, Loch 3 (180°) zuletzt, weil sich dort die beiden Fronten treffen. Kommt überall Silikon heraus, ist der Ring ohne Lufteinschluss gefüllt.</div>
   </div>
@@ -103,7 +104,7 @@
       <table>
         <tr><td>Schrauben</td><td>4 × M4 × 20 mm + 4 Muttern M4</td></tr>
         <tr><td>Trennmittel</td><td>Vaseline oder Spülmittel, dünn aufgetragen</td></tr>
-        <tr><td>Kartuschendüse</td><td>Spitze auf ca. Ø 5 mm abschneiden</td></tr>
+        <tr><td>Kartuschendüse</td><td>Spitze auf ca. Ø 5 mm abschneiden, sie sitzt im Trichter auf</td></tr>
         <tr><td>Öffnen</td><td>Schlitze links und rechts, z. B. mit einem Schlitzschraubendreher</td></tr>
       </table>
     </div>
@@ -196,18 +197,32 @@ for (const sx of [-1, 1]) for (const sy of [-1, 1]) {
   world.add(g, nut); bolts.push({ g, nut });
 }
 
-// Kartusche
+// Kartusche (Standard 310 ml): kegelige Düse, Gewindehals, Schulter, Zylinder, Kolben
 const cart = new THREE.Group();
-const nozMat = new THREE.MeshStandardMaterial({ color:0xf2f2f2, roughness:.4, transparent:true, opacity:.85 });
-const noz = new THREE.Mesh(new THREE.CylinderGeometry(2.6, 7, 55, 32, 1, true), nozMat); noz.rotation.x = Math.PI / 2; noz.position.z = 27.5;
-const body = new THREE.Mesh(new THREE.CylinderGeometry(23.5, 23.5, 70, 48), new THREE.MeshStandardMaterial({ color:0xdddddd, roughness:.6, transparent:true, opacity:.55 }));
-body.rotation.x = Math.PI / 2; body.position.z = 55 + 35;
-const nozSil = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 6.4, 54, 24), matSil); nozSil.rotation.x = Math.PI / 2; nozSil.position.z = 27.5;
-cart.add(noz, body, nozSil); world.add(cart);
+const nozMat = new THREE.MeshStandardMaterial({ color:0xf4f1e8, roughness:.45, side:THREE.DoubleSide });
+const bodyMat = new THREE.MeshStandardMaterial({ color:0xd9d9d4, roughness:.5, transparent:true, opacity:.6, side:THREE.DoubleSide });
+const labelMat = new THREE.MeshStandardMaterial({ color:0xe4572e, roughness:.6 });
+const zCyl = (r1, r2, h, z, mat, seg = 48) => {  // r1 unten (kleines z), r2 oben
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r2, r1, h, seg, 1, true), mat);
+  m.rotation.x = Math.PI / 2; m.position.z = z + h / 2; return m;
+};
+const NOZ_L = 42, TIP_R = 2.5;
+cart.add(
+  zCyl(TIP_R, 8.5, NOZ_L, 0, nozMat, 32),               // kegelige Düse, Spitze bei z = 0
+  zCyl(11, 11, 8, NOZ_L, nozMat, 32),                   // Gewindehals
+  zCyl(11, 23.5, 16, NOZ_L + 8, bodyMat),               // Schulter
+  zCyl(23.5, 23.5, 70, NOZ_L + 24, bodyMat),            // Zylinder
+  zCyl(23.5, 23.5, 20, NOZ_L + 24 + 20, labelMat),      // Etikett
+);
+const piston = new THREE.Mesh(new THREE.CylinderGeometry(22.8, 22.8, 4, 40), nozMat);
+piston.rotation.x = Math.PI / 2; piston.position.z = NOZ_L + 24 + 66; cart.add(piston);
+const nozSil = new THREE.Mesh(new THREE.CylinderGeometry(8, 2.1, NOZ_L, 24), matSil); nozSil.rotation.x = Math.PI / 2; nozSil.position.z = NOZ_L / 2;
+cart.add(nozSil); world.add(cart);
 const [spx, spy] = [R * Math.cos(rad(P.sprueAngle)), R * Math.sin(rad(P.sprueAngle))];
+const SEAT_Z = TOPZ - P.funnelDepth + .3;   // Düsenspitze sitzt am Trichtergrund
 
 // Silikon im Anguss und in den Kanälen
-const sprueSil = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 1, 16), matSil); sprueSil.rotation.x = Math.PI / 2; world.add(sprueSil);
+const sprueSil = new THREE.Mesh(new THREE.CylinderGeometry(P.sprueD / 2 - .15, P.sprueD / 2 - .15, 1, 16), matSil); sprueSil.rotation.x = Math.PI / 2; world.add(sprueSil);
 const fillA = new THREE.Mesh(new THREE.BufferGeometry(), matSil), fillB = new THREE.Mesh(new THREE.BufferGeometry(), matSil);
 world.add(fillA, fillB);
 let lastArc = -1;
@@ -251,7 +266,12 @@ const playBtn = document.getElementById('play');
 playBtn.onclick = () => { playing = !playing; playBtn.textContent = playing ? '⏸ Pause' : '▶ Abspielen'; };
 document.getElementById('restart').onclick = () => { t = 0; if (!playing) playBtn.click(); };
 scrub.oninput = () => { t = scrub.value / 1000 * T.end; };
-const xray = document.getElementById('xray'), rot = document.getElementById('rotate');
+const xray = document.getElementById('xray'), rot = document.getElementById('rotate'), cut = document.getElementById('cut');
+// Schnittebene durch die Anguss-Achse (Modell-Ebene y = 0); die Welt ist um -90° um X gedreht
+renderer.localClippingEnabled = true;
+const cutPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+const cutMats = [matBottom, matTop, matSil, nozMat, bodyMat, labelMat, skin, steel];
+cut.onchange = () => { cutMats.forEach(m => { m.clippingPlanes = cut.checked ? [cutPlane] : []; m.side = cut.checked ? THREE.DoubleSide : m.side; m.needsUpdate = true; }); };
 
 function update(t) {
   // Oberteil
@@ -268,13 +288,13 @@ function update(t) {
   }
   // Kartusche
   const nIn = seg(t, ...T.nozzle) * (1 - seg(t, T.fill[1] + 1.5, T.cure[0] + .5));
-  cart.position.set(spx, spy, TOPZ - 3.5 + 70 * (1 - nIn)); cart.visible = nIn > 0.001;
+  cart.position.set(spx, spy, SEAT_Z + 70 * (1 - nIn)); cart.visible = nIn > 0.001;
   nozSil.visible = t > T.sprue[0] - .3 && t < T.cure[0] + .5;
   // Silikon
   const sp = seg(t, ...T.sprue), deg = fillDeg(t), injected = t >= T.sprue[0];
   sprueSil.visible = injected && t < T.eject[0];
-  const sLen = Math.max(.01, (TOPZ - .2) * sp); sprueSil.scale.set(1, sLen, 1);
-  sprueSil.position.set(spx, spy, TOPZ - sLen / 2 + lift);
+  const sLen = Math.max(.01, (SEAT_Z + .2) * sp); sprueSil.scale.set(1, sLen, 1);
+  sprueSil.position.set(spx, spy, SEAT_Z + .2 - sLen / 2 + lift);
   setFill(deg);
   const ringVisible = injected && t < T.eject[0];
   fillA.visible = fillB.visible = ringVisible && deg > 0.3;

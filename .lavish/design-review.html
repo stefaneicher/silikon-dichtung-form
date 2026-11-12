@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design-Review: Entlüftung mit dem Finger</title>
+<style>
+  :root { --bg:#0f1419; --panel:#182029; --line:#2a3644; --txt:#dce3ea; --mut:#8a99a8; --acc:#2ec4b6; --warn:#ff9f1c; --ok:#5bd66b; --bad:#ff5c5c; --air:#7aa7ff; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--txt); line-height:1.5; }
+  header, section { padding:20px 5vw; max-width:1200px; margin:0 auto; }
+  h1 { margin:0 0 6px; font-size:clamp(1.5rem,3vw,2.1rem); }
+  h2 { margin:0 0 12px; font-size:1.3rem; }
+  h3 { margin:0 0 6px; font-size:1.05rem; }
+  .sub { color:var(--mut); margin:0; }
+  .verdict { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:16px; }
+  @media (max-width:860px){ .verdict, .two { grid-template-columns:minmax(0,1fr) !important; } }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; min-width:0; }
+  .card.warn { border-left:4px solid var(--warn); } .card.bad { border-left:4px solid var(--bad); }
+  .big { font-size:1.15rem; font-weight:600; margin:0 0 8px; }
+  .two { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; }
+  table { width:100%; border-collapse:collapse; font-size:.92rem; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--mut); font-weight:600; }
+  .tag { display:inline-block; padding:1px 9px; border-radius:20px; font-size:.78rem; border:1px solid var(--line); }
+  .t-ok { color:var(--ok); border-color:var(--ok); } .t-warn { color:var(--warn); border-color:var(--warn); } .t-bad { color:var(--bad); border-color:var(--bad); } .t-mut { color:var(--mut); }
+  svg { width:100%; max-width:380px; margin:0 auto; height:auto; display:block; }
+  .cap { font-size:.88rem; color:var(--mut); margin:8px 0 0; }
+  .wrap { overflow-x:auto; }
+  label.item { display:flex; gap:10px; padding:8px 10px; border:1px solid var(--line); border-radius:10px; margin-bottom:8px; cursor:pointer; align-items:flex-start; }
+  label.item:hover { background:#1e2833; }
+  label.item b { color:var(--acc); }
+  button { background:var(--acc); color:#06201d; border:0; border-radius:8px; padding:9px 16px; font-weight:600; cursor:pointer; }
+  a { color:var(--acc); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Design-Review: Entlüften mit dem Finger</h1>
+  <p class="sub">Frage: Lassen sich damit Lufteinschlüsse zuverlässig vermeiden, und ist das die richtige Methode?</p>
+</header>
+
+<section>
+  <div class="verdict">
+    <div class="card warn">
+      <p class="big">Prinzip richtig, Umsetzung noch nicht robust.</p>
+      <p style="margin:0 0 8px">Entlüftungslöcher an den Stellen, die zuletzt gefüllt werden, sind bewährtes Wissen. Dass Sie Löcher nacheinander verschließen, ist dagegen <b>meine eigene Idee</b>. Dafür habe ich keine Quelle gefunden. Sie funktioniert nur, wenn die Fronten wirklich bei 180° zusammentreffen. Das ist in der Praxis nicht garantiert.</p>
+      <p style="margin:0">Empfehlung: das Verschließen behalten, aber den Bereich 120°–240° zusätzlich passiv entlüften und die Finger durch Stopfen ersetzen.</p>
+    </div>
+    <div class="card">
+      <h3>Was stimmt und was nicht</h3>
+      <table>
+        <tr><td>Löcher an der letzten Füllstelle</td><td><span class="tag t-ok">bewährt</span></td></tr>
+        <tr><td>Anguss gegenüber der Entlüftung</td><td><span class="tag t-ok">bewährt</span></td></tr>
+        <tr><td>Löcher offen lassen, bis Silikon austritt</td><td><span class="tag t-ok">bewährt</span></td></tr>
+        <tr><td>Verschließen als Ventil, damit die Front weiterläuft</td><td><span class="tag t-warn">eigene Idee</span></td></tr>
+        <tr><td>Fronten treffen sich bei genau 180°</td><td><span class="tag t-bad">nicht garantiert</span></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Das größte Risiko: Wo treffen sich die Fronten?</h2>
+  <div class="two">
+    <div class="card">
+      <h3>Annahme im Modell</h3>
+      <svg viewBox="0 0 300 300" role="img" aria-label="Ideal: Fronten treffen sich bei 180 Grad">
+        <title>Ideal</title>
+        <circle cx="150" cy="150" r="100" fill="none" stroke="var(--line)" stroke-width="16"/>
+        <path d="M250 150 A100 100 0 0 0 50 150" fill="none" stroke="var(--acc)" stroke-width="12" stroke-linecap="round"/>
+        <path d="M250 150 A100 100 0 0 1 50 150" fill="none" stroke="var(--acc)" stroke-width="12" stroke-linecap="round"/>
+        <circle cx="250" cy="150" r="9" fill="var(--warn)"/><text x="232" y="132" fill="var(--txt)" font-size="12">Anguss</text>
+        <circle cx="150" cy="50" r="7" fill="var(--ok)"/><text x="162" y="46" fill="var(--txt)" font-size="12">1</text>
+        <circle cx="150" cy="250" r="7" fill="var(--ok)"/><text x="162" y="270" fill="var(--txt)" font-size="12">2</text>
+        <circle cx="50" cy="150" r="7" fill="var(--ok)"/><text x="14" y="134" fill="var(--txt)" font-size="12">3</text>
+        <text x="150" y="150" fill="var(--mut)" font-size="12" text-anchor="middle">Fronten treffen</text>
+        <text x="150" y="166" fill="var(--mut)" font-size="12" text-anchor="middle">sich bei 180°</text>
+      </svg>
+      <p class="cap">Beide Fronten laufen gleich schnell. Die letzte Luft sitzt genau unter Loch 3 und entweicht dort.</p>
+    </div>
+    <div class="card bad">
+      <h3>Realistisch: eine Seite läuft vor</h3>
+      <svg viewBox="0 0 300 300" role="img" aria-label="Real: Fronten treffen sich bei 147 Grad, Luft eingeschlossen">
+        <title>Real</title>
+        <circle cx="150" cy="150" r="100" fill="none" stroke="var(--line)" stroke-width="16"/>
+        <path d="M250 150 A100 100 0 0 0 73 86" fill="none" stroke="var(--acc)" stroke-width="12" stroke-linecap="round"/>
+        <path d="M250 150 A100 100 0 1 1 59 108" fill="none" stroke="var(--acc)" stroke-width="12" stroke-linecap="round"/>
+        <circle cx="66" cy="96" r="11" fill="none" stroke="var(--air)" stroke-width="3" stroke-dasharray="4 3"/>
+        <text x="78" y="64" fill="var(--air)" font-size="12">Luft bei ca. 147°</text>
+        <circle cx="250" cy="150" r="9" fill="var(--warn)"/><text x="232" y="132" fill="var(--txt)" font-size="12">Anguss</text>
+        <circle cx="150" cy="50" r="7" fill="var(--ok)"/><circle cx="150" cy="250" r="7" fill="var(--ok)"/>
+        <circle cx="50" cy="150" r="7" fill="var(--bad)"/><text x="14" y="134" fill="var(--bad)" font-size="12">3</text>
+        <text x="150" y="150" fill="var(--mut)" font-size="12" text-anchor="middle">Loch 3 liegt schon</text>
+        <text x="150" y="166" fill="var(--mut)" font-size="12" text-anchor="middle">im Silikon</text>
+      </svg>
+      <p class="cap">Die Fronten treffen sich bei 147°. Loch 3 hat da schon Silikon geliefert, und Sie verschließen es. Die eingeschlossene Luftblase hat kein Loch mehr.</p>
+    </div>
+  </div>
+  <p class="cap">Ursachen: Silikonpaste ist zäh, die Fließwege sind nie ganz gleich, und das Verschließen von Loch 1 oder 2 verschiebt die Front zusätzlich. Das ist eine Überlegung aus der Fließlogik, ich habe sie nicht am gedruckten Teil getestet.</p>
+</section>
+
+<section>
+  <h2>Weitere Schwachstellen</h2>
+  <div class="wrap card">
+    <table>
+      <tr><th>Thema</th><th>Problem</th><th>Gewicht</th></tr>
+      <tr><td><b>Bedienung</b></td><td>Kartuschenpistole halten und mehrere Löcher gleichzeitig mit Fingern verschließen, während die Form gehalten werden muss. Das ist mit zwei Händen kaum machbar.</td><td><span class="tag t-bad">hoch</span></td></tr>
+      <tr><td><b>Luft in der Kartusche</b></td><td>Der Anfang einer Kartusche enthält oft Luft und spuckt. Diese Luft gelangt direkt in den Ring und kommt nicht aus den Löchern, wenn sie schon hinter der Front sitzt.</td><td><span class="tag t-bad">hoch</span></td></tr>
+      <tr><td><b>Ring liegt flach</b></td><td>Alle Punkte des Rings liegen auf gleicher Höhe. Aufsteigende Luft hilft nicht, nur die Front schiebt die Luft.</td><td><span class="tag t-warn">mittel</span></td></tr>
+      <tr><td><b>Aushärten</b></td><td>1K-Sanitärsilikon härtet in einer geschlossenen Form kaum aus. 2K-Silikon ist besser, braucht aber eine Mischdüse und Sorgfalt gegen Luft im Gemisch.</td><td><span class="tag t-warn">mittel</span></td></tr>
+      <tr><td><b>Luft im Trichter</b></td><td>Beim Aufsetzen der Düse bleibt etwas Luft im Trichter und wird als erste Blase in den Anguss gedrückt.</td><td><span class="tag t-mut">gering</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Alternativen im Vergleich</h2>
+  <div class="wrap card">
+    <table>
+      <tr><th>Methode</th><th>Vorteil</th><th>Nachteil</th><th>Beleg</th></tr>
+      <tr><td><b>A. Finger (aktuell)</b></td><td>Keine Zusatzteile, anschaulich</td><td>Treffpunkt unsicher, Bedienung schwer</td><td><span class="tag t-warn">eigene Idee</span></td></tr>
+      <tr><td><b>B. Stopfen statt Finger</b></td><td>Beide Hände frei, gleiche Logik</td><td>Löcher brauchen eine konische Aufnahme</td><td><span class="tag t-mut">Folgerung aus A</span></td></tr>
+      <tr><td><b>C. Mikro-Schlitz</b> (ca. 0,05–0,1 mm tief) im Bereich 120–240°</td><td>Passiv, deckt jeden Treffpunkt ab, kein Verschließen nötig</td><td>Zu tief gibt Grat, zu flach entlüftet nicht. Im FDM-Druck schwer exakt</td><td><span class="tag t-ok">Spritzguss-Standard</span></td></tr>
+      <tr><td><b>D. Mehr Löcher</b> bei 135° und 225°</td><td>Einfach, deckt mehr Treffpunkte ab</td><td>Mehr Löcher zu verschließen</td><td><span class="tag t-ok">Praxisregel</span></td></tr>
+      <tr><td><b>E. Form neigen</b>: Anguss unten, Loch 3 oben</td><td>Luft steigt zur Entlüftung</td><td>Halterung nötig, bei zäher Paste nur kleiner Effekt</td><td><span class="tag t-ok">bewährt (Gießen)</span></td></tr>
+      <tr><td><b>F. Vakuum / Druckkessel</b></td><td>Entfernt auch Mikroblasen</td><td>Zusatzgeräte</td><td><span class="tag t-ok">bewährt, aufwendig</span></td></tr>
+    </table>
+  </div>
+  <p class="cap">Quellen: <a href="https://www.smooth-on.com/tutorials/venting-silicone-mold-eliminate-bubbles-finished-casting/">Smooth-On: Venting a Silicone Mold</a> · <a href="https://lkprototype.com/silicone-mold-venting-design/">Silicone Mold Venting Design</a> · <a href="https://www.foxmolds.com/blog/injection-mold-vent-design-tips/">Injection Mold Vent Design Tips</a> · <a href="https://weilinplastic.com/injection-mold-venting-design-guide/">Venting System in an Injection Mold</a>. Per Websuche gefunden und nur überflogen. Die Schlitztiefen stammen aus der Spritzguss-Praxis und sind für Silikonpaste nicht getestet.</p>
+</section>
+
+<section>
+  <h2>Was soll ich umsetzen?</h2>
+  <form class="card" data-lavish-question="umsetzung" onsubmit="event.preventDefault(); const sel=[...event.currentTarget.querySelectorAll('input[name=items]:checked')].map(i=>({id:i.value,label:i.dataset.label})); if(sel.length) window.lavish.queuePrompt('Setze jede ausgewählte Verbesserung im Repo um (generate.py, index.html mit Animation, README) und gib pro ID eine Rückmeldung.', {tag:'tracked-batch', text:'Umsetzen: '+sel.map(s=>s.id).join(', '), element:event.currentTarget, data:{items:sel}});">
+    <label class="item"><input type="checkbox" name="items" value="V-01" data-label="Mikro-Entlüftungsschlitz 120-240 Grad" checked> <span><b>V-01</b> Mikro-Entlüftungsschlitz im Bereich 120°–240° (passiv, C)</span></label>
+    <label class="item"><input type="checkbox" name="items" value="V-02" data-label="Zusatzlöcher bei 135 und 225 Grad"> <span><b>V-02</b> Zusätzliche Löcher bei 135° und 225° (D)</span></label>
+    <label class="item"><input type="checkbox" name="items" value="V-03" data-label="Konische Stopfen statt Finger" checked> <span><b>V-03</b> Konische Stopfen als druckbare Zusatzteile statt Finger (B)</span></label>
+    <label class="item"><input type="checkbox" name="items" value="V-04" data-label="Ständer zum Neigen der Form"> <span><b>V-04</b> Ständer, der die Form neigt: Anguss unten, Loch 3 oben (E)</span></label>
+    <label class="item"><input type="checkbox" name="items" value="V-05" data-label="Kartusche vorab spülen in Anleitung" checked> <span><b>V-05</b> Anleitung: Kartusche vorab spülen, Trichter mit Silikon füllen, langsam spritzen</span></label>
+    <label class="item"><input type="checkbox" name="items" value="V-06" data-label="Animation mit unsymmetrischem Fronttreffen" checked> <span><b>V-06</b> Animation: Fronten treffen sich nicht exakt bei 180°, Luftblase wird sichtbar</span></label>
+    <label class="item"><input type="checkbox" name="items" value="V-07" data-label="2K-Silikon als Standard in README"> <span><b>V-07</b> README: 2K-Silikon als Standard empfehlen</span></label>
+    <button type="submit">Auswahl an den Agenten senden</button>
+  </form>
+</section>
+</body>
+</html>

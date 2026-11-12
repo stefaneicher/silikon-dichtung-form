@@ -36,9 +36,10 @@ PIN_CLEAR = 0.3
 
 SPRUE_ANGLE = 0.0
 SPRUE_D = 2.5
-FUNNEL_D = 7.5           # Öffnung für Kartuschendüse
-FUNNEL_DEPTH = 5.0
-BOSS_D = 13.0
+FUNNEL_D = 18.0          # Trichter-Öffnung oben (Kartuschendüse kegelig, Spitze ca. Ø 5 mm)
+FUNNEL_BASE_D = 5.5      # Trichter-Grund: Düsenspitze sitzt hier auf
+FUNNEL_DEPTH = 10.0
+BOSS_D = 22.0
 BOSS_H = 4.0
 
 VENT_ANGLES = (90.0, 180.0, 270.0)   # Reihenfolge des Verschließens: 1=90°, 2=270°, 3=180°
@@ -107,7 +108,7 @@ def top_half():
         m = m - pin(x, y, d, clearance=PIN_CLEAR, extra=0.6).translate((0, 0, -0.01))
     top_z = H_TOP + BOSS_H
     m = m - Manifold.cylinder(top_z + 1, SPRUE_D / 2).translate((sx_, sy_, 0))
-    m = m - Manifold.cylinder(FUNNEL_DEPTH + 0.01, SPRUE_D / 2, FUNNEL_D / 2).translate(
+    m = m - Manifold.cylinder(FUNNEL_DEPTH + 0.01, FUNNEL_BASE_D / 2, FUNNEL_D / 2).translate(
         (sx_, sy_, top_z - FUNNEL_DEPTH))
     for a in VENT_ANGLES:
         vx, vy = polar(a)
@@ -153,7 +154,8 @@ def main():
     lines = ["// automatisch erzeugt von generate.py – nicht von Hand bearbeiten",
              "window.MOLD = {",
              f"  params: {{ringId:{RING_ID}, cord:{CORD}, rMajor:{R_MAJOR}, hBottom:{H_BOTTOM}, hTop:{H_TOP},"
-             f" bossH:{BOSS_H}, sprueAngle:{SPRUE_ANGLE}, ventAngles:{list(VENT_ANGLES)}, block:{BLOCK}, boltPos:{BOLT_POS}}},"]
+             f" bossH:{BOSS_H}, funnelD:{FUNNEL_D}, funnelBaseD:{FUNNEL_BASE_D}, funnelDepth:{FUNNEL_DEPTH}, sprueD:{SPRUE_D}, sprueAngle:{SPRUE_ANGLE},"
+             f" ventAngles:{list(VENT_ANGLES)}, block:{BLOCK}, boltPos:{BOLT_POS}}},"]
     for name, mesh in parts.items():
         data = base64.b64encode(mesh.export(file_type="stl")).decode()
         lines.append(f'  {name}: "{data}",')
