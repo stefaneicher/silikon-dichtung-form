@@ -22,7 +22,7 @@ Die Form hat drei Entlüftungslöcher, die Sie nacheinander mit dem Finger versc
 ## Ablauf
 1. Hohlraum dünn mit Trennmittel (Vaseline oder Spülmittel) einstreichen, Form schließen und verschrauben.
 2. Kartuschendüse auf ca. Ø 5 mm abschneiden und in den Trichter drücken. Dann Silikon einspritzen.
-3. Silikon tritt zuerst an **Loch 1 und Loch 2** aus. Beide mit dem Finger verschließen und weiter einspritzen.
+3. Silikon tritt zuerst an **Loch 1 und Loch 2** aus. Beide mit dem Finger oder einem **Stopfen** (`stopfen.stl`, Pinzette oder Finger) verschließen und weiter einspritzen.
 4. Danach tritt Silikon an **Loch 3** aus, wo sich die beiden Fronten treffen. Auch dieses Loch verschließen. Der Ring ist jetzt ohne Lufteinschlüsse gefüllt.
 5. Düse abnehmen und ca. 30–60 Minuten warten, bis sich außen eine Haut gebildet hat. Dann Schrauben lösen und das **Oberteil abnehmen**. Der Ring bleibt in der Nut des Unterteils und härtet dort **offen an der Luft** durch (siehe Hinweis).
 6. Nach 24–48 Stunden den Ring herausnehmen sowie Grat und Angussreste abschneiden.
@@ -37,7 +37,8 @@ Dateien im Ordner `stl/`:
 | Datei | Inhalt |
 |---|---|
 | `form_unterteil.stl`, `form_oberteil.stl` | Die beiden Formhälften einzeln |
-| `druckplatte.3mf` | Beide Hälften nebeneinander als zwei Objekte, für einen Druck auf einer Platte |
+| `stopfen.stl` | Konischer Stopfen für die Entlüftungslöcher, 3× drucken (liegt auf der Druckplatte schon dreimal bei) |
+| `druckplatte.3mf` | Beide Hälften und 3 Stopfen auf einer Platte, als einzelne Objekte |
 | `druckplatte.stl` | Dieselbe Platte als einzelne STL, falls der Slicer kein 3MF liest |
 | `o_ring_vorschau.stl` | Nur Vorschau des fertigen Rings, nicht drucken |
 

@@ -135,6 +135,14 @@ def top_half():
     return m
 
 
+def plug():
+    """Konischer Stopfen für ein Entlüftungsloch (Griff unten, damit er ohne Stützen druckbar ist)."""
+    handle = Manifold.cylinder(2.0, 4.0)
+    seat = Manifold.cylinder(0.8, VENT_D / 2 + 0.8, VENT_D / 2).translate((0, 0, 2.0))
+    stem = Manifold.cylinder(4.0, VENT_D / 2 - 0.05, VENT_D / 2 - 0.15).translate((0, 0, 2.8))
+    return handle + seat + stem
+
+
 def seal():
     return CrossSection.circle(R_MINOR).translate((R_MAJOR, 0)).revolve()
 
@@ -166,8 +174,14 @@ def main():
     b2 = b.copy(); b2.apply_translation((-b.bounds[1][0] - 5, 0, 0))
     t2 = t.copy(); t2.apply_translation((-t.bounds[0][0] + 5, 0, 0))
     scene = trimesh.Scene({"unterteil": b2, "oberteil": t2})
+    pl = to_trimesh(plug())
+    pl.export(os.path.join(root, "stl", "stopfen.stl"))
+    plugs = []
+    for i in range(3):
+        p = pl.copy(); p.apply_translation((-12 + i * 12, -32, 0)); plugs.append(p)
+        scene.add_geometry(p, node_name=f"stopfen{i + 1}")
     scene.export(os.path.join(root, "stl", "druckplatte.3mf"))
-    trimesh.util.concatenate([b2, t2]).export(os.path.join(root, "stl", "druckplatte.stl"))
+    trimesh.util.concatenate([b2, t2] + plugs).export(os.path.join(root, "stl", "druckplatte.stl"))
 
     lines = ["// automatisch erzeugt von generate.py – nicht von Hand bearbeiten",
              "window.MOLD = {",
